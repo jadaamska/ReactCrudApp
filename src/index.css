@@ -3,3 +3,47 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+header {
+  height: 3.5vw;
+  background-color: #8c99a6;
+  box-shadow: 0 0.3rem 0.5rem #708090;
+  text-transform: uppercase;
+  font-family: 'Nunito', sans-serif;
+  font-size: 2.5vw;
+  font-weight: bold;
+  color: #ffffff;
+  text-align: left;
+}
+.header-logo {
+  margin-left: 5vw;
+}
+li {
+  list-style-type: none;
+  margin: auto;
+}
+.mainView {
+  width: 96vw;
+  height: 60vw;
+  background-color: #e6e6e6;
+  box-shadow: 0 0.3rem 0.5rem #708090;
+}
+.input-field {
+  width: 80vw;
+  display: flex;
+  margin: 1.5vw auto 1.5vw auto;
+}
+.SeriesList {
+  display: flex;
+}
+.stars {
+  display:flex;
+}
+.red {
+  color: lightcoral;
+}
+table {
+  width: 76vw;
+}
+tr,td {
+  border: 1px solid #333;
+}
