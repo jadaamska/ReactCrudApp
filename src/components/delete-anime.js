@@ -13,7 +13,6 @@ class DeleteAnime extends Component {
     handleSubmit = event => {
         event.preventDefault();
 
-        const test = this.state.id;
         axios.delete(`http://localhost:4000/series/${this.state.id}`)
             .then(res => {
                 console.log(res);

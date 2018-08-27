@@ -6,7 +6,7 @@ import AddAnime from "./add-anime";
 class SeriesList extends Component {
     constructor(){
         super();
-        this.state = { series: [] };
+        this.state = { series: [] }
     }
 
 
@@ -75,3 +75,4 @@ class SeriesList extends Component {
 
 export default SeriesList;
 //parentCallback={() => this.setState({deleted: true})}
+//removeItem={this.removeElement}

@@ -13,6 +13,7 @@ header {
   font-weight: bold;
   color: #ffffff;
   text-align: left;
+  text-shadow: 1px 1px 15px #4d4d4d;
 }
 .header-logo {
   margin-left: 5vw;
@@ -31,6 +32,10 @@ li {
   display: flex;
   margin: 1.5vw auto 1.5vw auto;
 }
+.input-field button {
+  width: 12vw;
+  font-weight: bold;
+}
 .content {
   display: flex;
   text-align: center;
@@ -38,6 +43,7 @@ li {
 }
 .stars {
   display:flex;
+  margin: 1vw;
 }
 .red {
   color: lightcoral;
@@ -47,4 +53,7 @@ table {
 }
 tr {
   text-align: left;
+}
+.form-control {
+  margin: 0.1vw;
 }
