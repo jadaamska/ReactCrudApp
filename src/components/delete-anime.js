@@ -2,22 +2,15 @@ import React, {Component} from 'react';
 import axios from 'axios';
 
 class DeleteAnime extends Component {
-    state = {
-        id: this.props.id
-    }
-
-    // handleChange = event => {
-    //     this.setState({ id: event.target.value });
-    // }
 
     handleSubmit = event => {
         event.preventDefault();
 
-        axios.delete(`http://localhost:4000/series/${this.state.id}`)
+        axios.delete(`http://localhost:4000/series/${this.props.id}`)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
-                this.props.removeItem(this.state.id);
+                this.props.removeItem(this.props.id);
             })
     }
 

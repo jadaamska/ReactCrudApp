@@ -13,7 +13,7 @@ class SeriesList extends Component {
     componentDidMount() {
         axios.get(`http://localhost:4000/series`)
             .then(res => {
-                const series = res.data
+                const series = res.data;
                 console.log(res.data);
                 this.setState({ series });
             })
