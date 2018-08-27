@@ -6,17 +6,19 @@ class DeleteAnime extends Component {
         id: this.props.id
     }
 
-    handleChange = event => {
-        this.setState({ id: event.target.value });
-    }
+    // handleChange = event => {
+    //     this.setState({ id: event.target.value });
+    // }
 
     handleSubmit = event => {
         event.preventDefault();
 
+        const test = this.state.id;
         axios.delete(`http://localhost:4000/series/${this.state.id}`)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
+                this.props.removeItem(this.state.id);
             })
     }
 
@@ -24,7 +26,7 @@ class DeleteAnime extends Component {
         return (
             <div>
                 <form onSubmit={this.handleSubmit}>
-                    <button type="submit" onChange={this.handleChange} >Delete</button>
+                    <button className="btn btn-outline-secondary" type="submit"><i className="fas fa-trash-alt"/></button>
                 </form>
             </div>
         )
@@ -32,4 +34,3 @@ class DeleteAnime extends Component {
 }
 
 export default DeleteAnime;
-//<i onClick={this.handleChange} className="fas fa-trash-alt" />

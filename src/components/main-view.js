@@ -1,6 +1,5 @@
 import React, {Component} from "react";
 import SeriesList from './series-list';
-import AddAnime from "./add-anime";
 
 class MainView extends Component {
 
@@ -12,7 +11,6 @@ class MainView extends Component {
                         header
                     </div>
                 </header>
-                <AddAnime/>
                 <div className="content">
                     <SeriesList/>
                 </div>
