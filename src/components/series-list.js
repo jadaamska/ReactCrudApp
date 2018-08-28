@@ -2,11 +2,13 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import DeleteAnime from "./delete-anime";
 import AddAnime from "./add-anime";
+import EditAnime from "./edit-anime";
+import Stars from "./stars";
 
 class SeriesList extends Component {
     constructor(){
         super();
-        this.state = { series: [] }
+        this.state = { series: [] , toEdit: false , idToEdit : -1}
     }
 
 
@@ -31,6 +33,37 @@ class SeriesList extends Component {
         console.log(this.state.series);
     }
 
+    editElement = (id) => {
+        let x;
+        if(this.state.toEdit === true){
+            x = false;
+        } else {
+            x = true;
+        }
+        this.setState({toEdit: x, idToEdit : id});
+    }
+
+
+    showFieldToEdit() {
+        return(
+            <tr>
+                <li>
+                    <form className="input-field">
+                        <input type="text" className="form-control" placeholder="anime-title"
+                               name="title"
+                               aria-label="anime-title" aria-describedby="button-addon2"  />
+                        <input type="text" className="form-control" placeholder="anime-author"
+                               name="author"
+                               aria-label="anime-author" aria-describedby="button-addon2" />
+                        <Stars />
+                        <button className="btn btn-outline-secondary" type="submit" id="button-addon2">Add</button>
+                    </form>
+                </li>
+            </tr>
+        )
+    }
+
+
     render() {
         const starArray = [1,2,3,4,5];
         return (
@@ -44,25 +77,33 @@ class SeriesList extends Component {
                         <th scope="col">Author</th>
                         <th scope="col">Score</th>
                         <th scope="col">Delete</th>
+                        <th scope="col">Edit</th>
                     </tr>
                     </thead>
                     <tbody>
                         {this.state.series.map((series, index) =>
-                        <tr key={index}>
+                            <tr key={index}>
                             <th scope="row">
                                 <li key={index}>{index + 1}</li>
                             </th>
                             <td>
-                                <li key={index}>{series.title}</li>
+                                <li key={index}>{this.state.toEdit && series.id === this.state.idToEdit ? <input type="text" className="form-control" placeholder={series.title}
+                                                                           name="title"
+                                                                           aria-label="anime-title" aria-describedby="button-addon2" />: series.title}</li>
                             </td>
                             <td>
-                                <li key={index}>{series.author}</li>
+                                <li key={index}>{this.state.toEdit && series.id === this.state.idToEdit ? <input type="text" className="form-control" placeholder={series.author}
+                                                                                                                 name="title"
+                                                                                                                 aria-label="anime-title" aria-describedby="button-addon2" />: series.author}</li>
                             </td>
                             <td>
-                                <li key={index}> {starArray.map(item => <i key={item} className={item <= series.rating ? "fas fa-star red" : "fas fa-star"}/>)} </li>
+                                <li key={index}>{starArray.map(item => <i key={item} className={item <= series.rating ? "fas fa-star red" : "fas fa-star"}/>)} </li>
                             </td>
                             <td>
                                 <li key={index}> <DeleteAnime id={series.id} removeItem={this.removeElement}/></li>
+                            </td>
+                            <td>
+                                <li key={index}> <EditAnime idToEdit={series.id} editItem={this.editElement}/></li>
                             </td>
                         </tr>
                         )}
@@ -75,4 +116,4 @@ class SeriesList extends Component {
 
 export default SeriesList;
 //parentCallback={() => this.setState({deleted: true})}
-//removeItem={this.removeElement}
+{/*{this.state.toEdit && this.showFieldToEdit()}*/}
