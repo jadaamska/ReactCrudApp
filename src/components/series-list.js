@@ -3,7 +3,6 @@ import axios from 'axios';
 import DeleteAnime from "./delete-anime";
 import AddAnime from "./add-anime";
 import EditAnime from "./edit-anime";
-import Stars from "./stars";
 
 class SeriesList extends Component {
     constructor(){
@@ -44,26 +43,6 @@ class SeriesList extends Component {
     }
 
 
-    showFieldToEdit() {
-        return(
-            <tr>
-                <li>
-                    <form className="input-field">
-                        <input type="text" className="form-control" placeholder="anime-title"
-                               name="title"
-                               aria-label="anime-title" aria-describedby="button-addon2"  />
-                        <input type="text" className="form-control" placeholder="anime-author"
-                               name="author"
-                               aria-label="anime-author" aria-describedby="button-addon2" />
-                        <Stars />
-                        <button className="btn btn-outline-secondary" type="submit" id="button-addon2">Add</button>
-                    </form>
-                </li>
-            </tr>
-        )
-    }
-
-
     render() {
         const starArray = [1,2,3,4,5];
         return (
@@ -89,12 +68,12 @@ class SeriesList extends Component {
                             <td>
                                 <li key={index}>{this.state.toEdit && series.id === this.state.idToEdit ? <input type="text" className="form-control" placeholder={series.title}
                                                                            name="title"
-                                                                           aria-label="anime-title" aria-describedby="button-addon2" />: series.title}</li>
+                                                                           aria-label="anime-title" aria-describedby="button-addon2" onChange={this.handleChange} />: series.title}</li>
                             </td>
                             <td>
                                 <li key={index}>{this.state.toEdit && series.id === this.state.idToEdit ? <input type="text" className="form-control" placeholder={series.author}
-                                                                                                                 name="title"
-                                                                                                                 aria-label="anime-title" aria-describedby="button-addon2" />: series.author}</li>
+                                                                                                                 name="author"
+                                                                                                                 aria-label="anime-title" aria-describedby="button-addon2" onChange={this.handleChange} />: series.author}</li>
                             </td>
                             <td>
                                 <li key={index}>{starArray.map(item => <i key={item} className={item <= series.rating ? "fas fa-star red" : "fas fa-star"}/>)} </li>
@@ -103,7 +82,8 @@ class SeriesList extends Component {
                                 <li key={index}> <DeleteAnime id={series.id} removeItem={this.removeElement}/></li>
                             </td>
                             <td>
-                                <li key={index}> <EditAnime idToEdit={series.id} editItem={this.editElement}/></li>
+                                <li key={index}> <EditAnime idToEdit={series.id} titleToEdit={series.title} authorToEdit={series.author}
+                                                            editItem={this.editElement} changeIcon={this.state.toEdit && series.id === this.state.idToEdit} /></li>
                             </td>
                         </tr>
                         )}
@@ -116,4 +96,3 @@ class SeriesList extends Component {
 
 export default SeriesList;
 //parentCallback={() => this.setState({deleted: true})}
-{/*{this.state.toEdit && this.showFieldToEdit()}*/}
