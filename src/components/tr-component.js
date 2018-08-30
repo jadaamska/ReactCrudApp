@@ -2,15 +2,20 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import DeleteAnime from "./delete-anime";
 import EditAnime from "./edit-anime";
+import Stars from "./stars";
 
 class TrComponent extends Component {
 
     constructor() {
         super();
-        this.state = {toEdit: false , idToEdit : -1, title: '', author: '', rating: ''}
+        this.state = {toEdit: false , idToEdit : -1, titleToEdit: '' ,authorToEdit: '', ratingToEdit: ''}
 }
 
+    defaultValues(){
+        this.setState({titleToEdit: this.props.series.title, authorToEdit: this.props.series.author, ratingToEdit: this.props.series.rating});
+    }
     editElement = (id) => {
+        this.defaultValues();
         this.setState({toEdit: !this.state.toEdit, idToEdit : id});
     }
 
@@ -18,19 +23,26 @@ class TrComponent extends Component {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    handleSubmit() {
+    handleChangeRating = id => {
+        this.setState({ ratingToEdit: id });
+    }
 
-        axios.put(`http://localhost:4000/series/${this.props.idToEdit}`, {
-            title: this.state.title,
-            author: this.state.author,
-            rating: this.state.rating
+
+    handleSubmit = () => {
+
+        axios.put(`http://localhost:4000/series/${this.state.idToEdit}`, {
+            title: this.state.titleToEdit,
+            author: this.state.authorToEdit,
+            rating: this.state.ratingToEdit
         })
             .then(res => {
                 console.log(res.data);
+                this.props.onUpdate();
             })
             .catch(err => {
                 console.log(err);
             });
+        this.setState({toEdit: !this.state.toEdit});
     }
 
 
@@ -47,7 +59,7 @@ class TrComponent extends Component {
                         ? <input type="text"
                                  className="form-control"
                                  placeholder={this.props.series.title}
-                                 name="title"
+                                 name="titleToEdit"
                                  aria-label="anime-title"
                                  aria-describedby="button-addon2"
                                  onChange={this.handleChange}/>
@@ -59,14 +71,17 @@ class TrComponent extends Component {
                         ? <input type="text"
                                  className="form-control"
                                  placeholder={this.props.series.author}
-                                 name="author"
+                                 name="authorToEdit"
                                  aria-label="anime-title"
                                  aria-describedby="button-addon2"
                                  onChange={this.handleChange}/>
                         : this.props.series.author}
                 </td>
                 <td>
-                    {starArray.map(item =>
+                    {this.state.toEdit
+                        && this.props.series.id === this.state.idToEdit
+                        ? <Stars changeRating={this.handleChangeRating} currentStarState={this.props.series.rating}/>
+                        :  starArray.map(item =>
                         <i key={item}
                            className={item <= this.props.series.rating
                                ? "fas fa-star red"

@@ -6,11 +6,10 @@ import TrComponent from "./tr-component";
 class SeriesList extends Component {
     constructor(){
         super();
-        this.state = { series: [] , titleNewValue: '', authorNewValue: ''}
+        this.state = { series: [] }
     }
 
-
-    componentDidMount() {
+    fetchList = () => {
         axios.get(`http://localhost:4000/series`)
             .then(res => {
                 const series = res.data;
@@ -18,6 +17,9 @@ class SeriesList extends Component {
                 this.setState({ series });
             })
             .catch(err => console.log(err));
+    }
+    componentDidMount() {
+        this.fetchList()
     }
 
     addElement = (element) => {
@@ -30,7 +32,6 @@ class SeriesList extends Component {
         this.setState({series: this.state.series.filter(item => item.id !== id)});
         console.log(this.state.series);
     }
-
 
 
     render() {
@@ -50,7 +51,7 @@ class SeriesList extends Component {
                     </thead>
                     <tbody>
                         {this.state.series.map((series, index) =>
-                            <TrComponent index={index} series={series} removeElement={this.removeElement}/>
+                            <TrComponent index={index} series={series} removeElement={this.removeElement} onUpdate={this.fetchList}/>
                         )}
                     </tbody>
                 </table>

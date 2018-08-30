@@ -2,15 +2,17 @@ import React, {Component} from 'react';
 
 class Stars extends Component {
     state = {
-        star: null
+        star: this.props.currentStarState
     }
 
-
     setRating(id) {
-        this.setState({
-            star: id
-        })
-        this.props.changeRating(id)
+        if(id === this.state.star){
+            this.setState({star: null})
+            this.props.changeRating(null)
+        } else {
+            this.setState({star: id})
+            this.props.changeRating(id)
+        }
     }
 
     render() {
@@ -18,7 +20,12 @@ class Stars extends Component {
 
         return (
             <div className="stars">
-                {starArray.map(item => <i key={item} onClick={() =>  this.setRating(item)} className={item <= this.state.star ? "fas fa-star red" : "fas fa-star"}/>)}
+                {
+                    starArray.map(item => <i key={item}
+                                             onClick={() =>  this.setRating(item)}
+                                             className={item <= this.state.star
+                                                 ? "fas fa-star red"
+                                                 : "fas fa-star"}/>)}
             </div>
         )
   }

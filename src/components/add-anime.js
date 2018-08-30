@@ -17,7 +17,6 @@ class AddAnime extends Component {
         this.setState({ rating: id });
     }
 
-
     handleSubmit = event => {
         event.preventDefault();
 
@@ -39,7 +38,7 @@ class AddAnime extends Component {
                         <input type="text" className="form-control" placeholder="anime-author"
                                name="author"
                                aria-label="anime-author" aria-describedby="button-addon2" onChange={this.handleChange} />
-                        <Stars changeRating={this.handleChangeRating}/>
+                        <Stars changeRating={this.handleChangeRating} currentStarState={0}/>
                         <button className="btn btn-outline-secondary" type="submit" id="button-addon2">Add</button>
                 </form>
             </div>
