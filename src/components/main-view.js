@@ -8,7 +8,7 @@ class MainView extends Component {
             <div className="mainView ">
                 <header>
                     <div className="header-logo">
-                        header
+                        AnimeList
                     </div>
                 </header>
                 <div className="content">

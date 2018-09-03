@@ -7,7 +7,6 @@ header {
   height: 3.5vw;
   background-color: #8c99a6;
   box-shadow: 0 0.3rem 0.5rem #708090;
-  text-transform: uppercase;
   font-family: 'Nunito', sans-serif;
   font-size: 2.5vw;
   font-weight: bold;
@@ -56,4 +55,10 @@ tr {
 }
 .form-control {
   margin: 0.1vw;
+}
+th {
+    width: 6vw;
+}
+td {
+  width: 18vw;
 }

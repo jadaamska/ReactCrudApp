@@ -3,6 +3,9 @@ import axios from 'axios';
 import Stars from "./stars";
 
 class AddAnime extends Component {
+
+    myFormRef = '';
+
     state = {
         title: '',
         author: '',
@@ -25,13 +28,14 @@ class AddAnime extends Component {
                 console.log(res);
                 console.log(res.data);
                 this.props.add(res.data);
+                this.myFormRef.reset();
             })
     }
 
     render() {
         return (
             <div>
-                <form className="input-field" onSubmit={this.handleSubmit}>
+                <form ref={(item) => this.myFormRef = item} className="input-field" onSubmit={this.handleSubmit}>
                         <input type="text" className="form-control" placeholder="anime-title"
                                name="title"
                                aria-label="anime-title" aria-describedby="button-addon2" onChange={this.handleChange} />

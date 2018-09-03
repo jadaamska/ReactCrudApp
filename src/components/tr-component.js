@@ -27,7 +27,6 @@ class TrComponent extends Component {
         this.setState({ ratingToEdit: id });
     }
 
-
     handleSubmit = () => {
 
         axios.put(`http://localhost:4000/series/${this.state.idToEdit}`, {

@@ -7,10 +7,11 @@ class Stars extends Component {
 
     setRating(id) {
         if(id === this.state.star){
-            this.setState({star: null})
+            this.setState({star: null});
             this.props.changeRating(null)
-        } else {
-            this.setState({star: id})
+        }
+        else {
+            this.setState({star: id});
             this.props.changeRating(id)
         }
     }
@@ -22,7 +23,7 @@ class Stars extends Component {
             <div className="stars">
                 {
                     starArray.map(item => <i key={item}
-                                             onClick={() =>  this.setRating(item)}
+                                             onClick={() => this.setRating(item)}
                                              className={item <= this.state.star
                                                  ? "fas fa-star red"
                                                  : "fas fa-star"}/>)}

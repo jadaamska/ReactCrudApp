@@ -37,7 +37,7 @@ class SeriesList extends Component {
     render() {
         return (
             <div className="SeriesList">
-                <AddAnime add={this.addElement}/>
+                <AddAnime add={this.addElement} />
                 <table className="table table-hover">
                     <thead>
                     <tr>
