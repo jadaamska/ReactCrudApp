@@ -16,6 +16,10 @@ class Stars extends Component {
         }
     }
 
+    resetStars() {
+        this.setState({star: 0})
+    }
+
     render() {
         const starArray = [1,2,3,4,5];
 

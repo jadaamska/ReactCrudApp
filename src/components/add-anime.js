@@ -4,6 +4,12 @@ import Stars from "./stars";
 
 class AddAnime extends Component {
 
+    constructor() {
+        super();
+        this.child = React.createRef();
+    }
+
+
     myFormRef = '';
 
     state = {
@@ -29,6 +35,7 @@ class AddAnime extends Component {
                 console.log(res.data);
                 this.props.add(res.data);
                 this.myFormRef.reset();
+                this.child.current.resetStars();
             })
     }
 
@@ -42,7 +49,7 @@ class AddAnime extends Component {
                         <input type="text" className="form-control" placeholder="anime-author"
                                name="author"
                                aria-label="anime-author" aria-describedby="button-addon2" onChange={this.handleChange} />
-                        <Stars changeRating={this.handleChangeRating} currentStarState={0}/>
+                        <Stars ref={this.child} changeRating={this.handleChangeRating} currentStarState={0}/>
                         <button className="btn btn-outline-secondary" type="submit" id="button-addon2">Add</button>
                 </form>
             </div>
